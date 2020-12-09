@@ -3,6 +3,7 @@ import torch.utils.data
 import torchvision
 
 from .coco import build as build_coco
+from .bat_annotation import build as build_bat_data
 
 
 def get_coco_api_from_dataset(dataset):
@@ -23,3 +24,7 @@ def build_dataset(image_set, args):
         from .coco_panoptic import build as build_coco_panoptic
         return build_coco_panoptic(image_set, args)
     raise ValueError(f'dataset {args.dataset_file} not supported')
+
+
+def build_bat_dataset(image_set, args):
+    return build_bat_data(image_set, args)

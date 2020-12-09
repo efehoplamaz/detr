@@ -25,10 +25,13 @@ def train_one_epoch(model: torch.nn.Module, criterion: torch.nn.Module,
     header = 'Epoch: [{}]'.format(epoch)
     print_freq = 10
 
+    #print(next(ittermetric_logger.log_every(data_loader, print_freq, header))
     for samples, targets in metric_logger.log_every(data_loader, print_freq, header):
-        samples = samples.to(device)
-        targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
 
+        samples = samples.to(device)
+        print(len(targets))
+        targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
+        #print(targets)
         outputs = model(samples)
         loss_dict = criterion(outputs, targets)
         weight_dict = criterion.weight_dict
